@@ -56,4 +56,13 @@ function HttpClient() {
         anHttpRequest.open("GET", aUrl, true);
         anHttpRequest.send(null);
     }
+
+}
+
+function testStringLength(string){
+    return string.length;
+}
+
+function returnKittens(){
+    return "kittens";
 }
