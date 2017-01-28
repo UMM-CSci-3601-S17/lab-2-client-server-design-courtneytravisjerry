@@ -31,6 +31,9 @@ public class Server {
         // Redirect for kittens form
         redirect.get("/kittens", "/kittens.html");
 
+        //Redirect for 'todo'
+        redirect.get("/todo", "/todo.html");
+
         // List users
         get("api/users", (req, res) -> {
             res.type("application/json");
