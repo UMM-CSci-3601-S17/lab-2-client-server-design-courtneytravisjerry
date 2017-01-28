@@ -12,17 +12,17 @@ import com.google.gson.Gson;
 
 public class TodoController {
 
-    private Todo[] Todos;
+    private Todo[] todos;
 
     public TodoController() throws IOException {
         Gson gson = new Gson();
-        FileReader reader = new FileReader("src/main/data/Todos.json");
-        Todos = gson.fromJson(reader, Todo[].class);
+        FileReader reader = new FileReader("src/main/data/todos.json");
+        todos = gson.fromJson(reader, Todo[].class);
     }
 
     // List Todos
     public Todo[] listTodos(Map<String, String[]> queryParams) {
-        Todo[] filteredTodos = Todos;
+        Todo[] filteredTodos = todos;
 
         // Filter age if defined
 //        if(queryParams.containsKey("age")) {
@@ -33,14 +33,11 @@ public class TodoController {
         return filteredTodos;
     }
 
-//    // Filter Todos by age
-//    public Todo[] filterTodosByAge(Todo[] filteredTodos, int age) {
-//        return Arrays.stream(filteredTodos).filter(x -> x.age == age).toArray(Todo[]::new);
-//    }
 
-    // Get a single Todo
+
+    // Get a single Todo_
     public Todo getTodo(String id) {
-        return Arrays.stream(Todos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
+        return Arrays.stream(todos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
     }
 
 }
