@@ -117,6 +117,7 @@
     "status": false,
     "body": "Id dolor culpa quis dolore elit sunt dolore. Amet adipisicing duis aliquip deserunt ut fugiat dolore.",
     "category": "software design"
+        get ( "/kittens", (req,res) -> "meow");
   },
   {
     "_id": "58895985fac640cc6cb5f3b0",

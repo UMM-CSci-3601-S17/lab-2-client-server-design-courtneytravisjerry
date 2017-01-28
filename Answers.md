@@ -2,7 +2,8 @@ What is the purpose of .gitIgnore?
     It's as list of files that Git ignores.
 
 Explain what a route is.
-
+    THINGS, that will reroute the user's desired path to a more appropriate path that fits with our website.
+    Will redirect a user's extension to the desired path
 
 What is the purpose of umm3601.Server class? What is the purpose of the umm3601.user.UserController class?
     Redirects urls and decides how the users will be returned
