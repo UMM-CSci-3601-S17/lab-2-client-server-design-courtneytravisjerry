@@ -41,6 +41,11 @@ public class TodoController {
             filteredTodos = returnstatuses(state);
         }
 
+        if(queryParams.containsKey("contains")){
+            String search = queryParams.get("contains")[0];
+            filteredTodos = searchBody(search);
+        }
+
         return filteredTodos;
     }
 
@@ -68,6 +73,24 @@ public class TodoController {
         int i;
         for(i = 0; i < todos.length; i++){
             if (todos[i].status.equals(state)) {
+                holding[j] = todos[i];
+                j++;
+            }
+        }
+        Todo[] toReturn = new Todo[j];
+        for (i=0; i<toReturn.length; i++) {
+            toReturn[i] = holding[i];
+        }
+        return toReturn;
+    }
+
+    // returns all todos with search in body
+    public Todo[] searchBody(String key){
+        Todo[] holding = new Todo[todos.length];
+        int j = 0;
+        int i;
+        for(i = 0; i < todos.length; i++){
+            if (todos[i].body.contains(key)) {
                 holding[j] = todos[i];
                 j++;
             }
