@@ -50,6 +50,10 @@ public class TodoController {
             String owner = queryParams.get("owner")[0];
             filteredTodos = filterOwner(owner);
         }
+        if(queryParams.containsKey("category")){
+            String category = queryParams.get("category")[0];
+            filteredTodos = filterCategory(category);
+        }
 
         return filteredTodos;
     }
@@ -123,5 +127,21 @@ public class TodoController {
        return toReturn;
    }
 
+    public Todo[] filterCategory(String category) {
+        Todo[] holding = new Todo[todos.length];
+        int j = 0;
+        int i;
+        for(i = 0; i < todos.length; i++){
+            if (todos[i].category.equals(category)) {
+                holding[j] = todos[i];
+                j++;
+            }
+        }
+        Todo[] toReturn = new Todo[j];
+        for (i=0; i<toReturn.length; i++) {
+            toReturn[i] = holding[i];
+        }
+        return toReturn;
+    }
 
 }
