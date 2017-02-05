@@ -63,6 +63,7 @@ public class Server {
             String id = req.params("id");
             return gson.toJson(todoController.getTodo(id));
         });
+
     }
 
     public static JsonObject wrapInJson(String name, JsonElement jsonElement) {

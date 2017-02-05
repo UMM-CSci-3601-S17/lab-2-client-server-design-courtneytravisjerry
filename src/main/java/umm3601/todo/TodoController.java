@@ -24,11 +24,11 @@ public class TodoController {
     public Todo[] listTodos(Map<String, String[]> queryParams) {
         Todo[] filteredTodos = todos;
 
-        // Filter age if defined
-//        if(queryParams.containsKey("age")) {
-//            int age = Integer.parseInt(queryParams.get("age")[0]);
-//            filteredTodos = filterTodosByAge(filteredTodos, age);
-//        }
+        // page limit
+        if(queryParams.containsKey("limit")){
+            int limit = Integer.parseInt(queryParams.get("limit")[0]);
+            filteredTodos = getPageLimit(limit);
+        }
 
         return filteredTodos;
     }
@@ -40,4 +40,14 @@ public class TodoController {
         return Arrays.stream(todos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
     }
 
+    //Get todo page limit
+    public Todo[] getPageLimit(int limit){
+        Todo[] toReturn = new Todo[limit];
+        int i = 0;
+        while(i < limit){
+            toReturn[i] = todos[i];
+            i++;
+        }
+        return toReturn;
+    }
 }
