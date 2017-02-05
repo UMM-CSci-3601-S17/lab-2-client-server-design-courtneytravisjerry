@@ -15,7 +15,7 @@ public class Server {
         staticFiles.location("/public");
         Gson gson = new Gson();
         UserController userController = new UserController();
-//        TodoController todoController = new TodoController();
+        TodoController todoController = new TodoController();
             // ^ this makes the server stop running and idk why
 
         // Simple example route
@@ -43,11 +43,11 @@ public class Server {
             return wrapInJson("users", gson.toJsonTree(userController.listUsers(req.queryMap().toMap())));
         });
 
-//        // List todos
-//        get("api/todo", (req, res) -> {
-//            res.type("application/json");
-//            return wrapInJson("todo", gson.toJsonTree(todoController.listTodos(req.queryMap().toMap())));
-//        });
+        // List todos
+        get("api/todo", (req, res) -> {
+            res.type("application/json");
+            return wrapInJson("todos", gson.toJsonTree(todoController.listTodos(req.queryMap().toMap())));
+        });
 
 
         // See specific user
