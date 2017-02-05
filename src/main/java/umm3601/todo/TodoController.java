@@ -46,6 +46,11 @@ public class TodoController {
             filteredTodos = searchBody(search);
         }
 
+        if(queryParams.containsKey("owner")){
+            String owner = queryParams.get("owner")[0];
+            filteredTodos = filterOwner(owner);
+        }
+
         return filteredTodos;
     }
 
@@ -100,5 +105,23 @@ public class TodoController {
             toReturn[i] = holding[i];
         }
         return toReturn;
-    }
+   }
+   public Todo[] filterOwner(String owner) {
+       Todo[] holding = new Todo[todos.length];
+       int j = 0;
+       int i;
+       for(i = 0; i < todos.length; i++){
+           if (todos[i].owner.equals(owner)) {
+               holding[j] = todos[i];
+               j++;
+           }
+       }
+       Todo[] toReturn = new Todo[j];
+       for (i=0; i<toReturn.length; i++) {
+           toReturn[i] = holding[i];
+       }
+       return toReturn;
+   }
+
+
 }
