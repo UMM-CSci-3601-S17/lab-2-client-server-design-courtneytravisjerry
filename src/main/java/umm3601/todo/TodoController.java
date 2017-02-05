@@ -30,6 +30,17 @@ public class TodoController {
             filteredTodos = getPageLimit(limit);
         }
 
+        if(queryParams.containsKey("status")){
+            boolean state;
+            if ("complete".equals(queryParams.get("status")[0])) {
+                state = true;
+            } else {
+                state =false;
+            }
+
+            filteredTodos = returnstatuses(state);
+        }
+
         return filteredTodos;
     }
 
@@ -47,6 +58,23 @@ public class TodoController {
         while(i < limit){
             toReturn[i] = todos[i];
             i++;
+        }
+        return toReturn;
+    }
+    //Return All todos of a status.
+    public Todo[] returnstatuses(boolean state) {
+        Todo[] holding = new Todo[todos.length];
+        int j = 0;
+        int i;
+        for(i = 0; i < todos.length; i++){
+            if (todos[i].status.equals(state)) {
+                holding[j] = todos[i];
+                j++;
+            }
+        }
+        Todo[] toReturn = new Todo[j];
+        for (i=0; i<toReturn.length; i++) {
+            toReturn[i] = holding[i];
         }
         return toReturn;
     }
