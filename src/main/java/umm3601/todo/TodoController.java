@@ -24,8 +24,7 @@ public class TodoController {
     public Todo[] listTodos(Map<String, String[]> queryParams) {
         Todo[] filteredTodos = todos;
 
-
-
+        // filter by status
         if(queryParams.containsKey("status")){
             boolean state;
             if ("complete".equals(queryParams.get("status")[0])) {
@@ -37,19 +36,25 @@ public class TodoController {
             }
         }
 
+        // filter by keyword
         if(queryParams.containsKey("contains")){
             String search = queryParams.get("contains")[0];
             filteredTodos = searchBody(search, filteredTodos);
         }
 
+        // filter by owner
         if(queryParams.containsKey("owner")){
             String owner = queryParams.get("owner")[0];
             filteredTodos = filterOwner(owner, filteredTodos);
         }
+
+        // filter by category
         if(queryParams.containsKey("category")){
             String category = queryParams.get("category")[0];
             filteredTodos = filterCategory(category, filteredTodos);
         }
+
+        // order by keyword
         if(queryParams.containsKey("orderBy")){
             String param = queryParams.get("orderBy")[0];
             if(param.equals("owner")){
@@ -64,6 +69,7 @@ public class TodoController {
                 filteredTodos = new Todo[0];
             }
         }
+
         // page limit
         if(queryParams.containsKey("limit")){
             int limit = Integer.parseInt(queryParams.get("limit")[0]);
@@ -90,6 +96,7 @@ public class TodoController {
         }
         return toReturn;
     }
+
     //Return All todos of a status.
     public Todo[] returnstatuses(boolean state, Todo[] filteredTodos) {
         Todo[] holding = new Todo[filteredTodos.length];
@@ -125,6 +132,8 @@ public class TodoController {
         }
         return toReturn;
    }
+
+   // returns all todos with a given owner
    public Todo[] filterOwner(String owner, Todo[] filteredTodos) {
        Todo[] holding = new Todo[filteredTodos.length];
        int j = 0;
@@ -142,6 +151,7 @@ public class TodoController {
        return toReturn;
    }
 
+   // returns all todos with a given category
     public Todo[] filterCategory(String category, Todo[] filteredTodos) {
         Todo[] holding = new Todo[filteredTodos.length];
         int j = 0;
@@ -159,7 +169,7 @@ public class TodoController {
         return toReturn;
     }
 
-    //From rosettacode.org :)
+    // returns all todos, sorted by owner
     public Todo[] orderByOwner (Todo[] filteredTodos){
         Todo[] tmp = new Todo[filteredTodos.length];
         int i; int j;
@@ -175,6 +185,7 @@ public class TodoController {
         return filteredTodos;
     }
 
+    // returns all todos, sorted by category
     public Todo[] orderByCategory(Todo[] filteredTodos){
         Todo[] tmp = new Todo[filteredTodos.length];
         int i; int j;
@@ -190,6 +201,7 @@ public class TodoController {
         return filteredTodos;
     }
 
+    // returns all todos, sorted by body
     public Todo[] orderByBody(Todo[] filteredTodos){
         Todo[] tmp = new Todo[filteredTodos.length];
         int i; int j;
@@ -205,12 +217,13 @@ public class TodoController {
         return filteredTodos;
     }
 
+    // returns all todos, sorted by status
     public Todo[] orderByStatus(Todo[] filteredTodos){
         Todo[] tmp = new Todo[filteredTodos.length];
         int i; int j;
         for (i = 0; i<filteredTodos.length;i++) {
             for (j = i; j<filteredTodos.length; j++) {
-                if (filteredTodos[i].status.compareTo(filteredTodos[j].status) > 0) {
+                if (filteredTodos[i].status.compareTo(filteredTodos[j].status) < 0) {
                     Todo temp = filteredTodos[i];
                     filteredTodos[i] = filteredTodos[j];
                     filteredTodos[j] = temp;
