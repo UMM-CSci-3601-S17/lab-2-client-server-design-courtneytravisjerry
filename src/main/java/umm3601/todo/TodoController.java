@@ -29,12 +29,12 @@ public class TodoController {
         if(queryParams.containsKey("status")){
             boolean state;
             if ("complete".equals(queryParams.get("status")[0])) {
-                state = true;
+                filteredTodos = returnstatuses(true, filteredTodos);
+            } else if ("incomplete".equals(queryParams.get("status")[0])){
+                filteredTodos = returnstatuses(false, filteredTodos);
             } else {
-                state =false;
+                filteredTodos = new Todo[0];
             }
-
-            filteredTodos = returnstatuses(state, filteredTodos);
         }
 
         if(queryParams.containsKey("contains")){
@@ -61,7 +61,7 @@ public class TodoController {
             } else if (param.equals("body")){
                 filteredTodos = orderByBody(filteredTodos);
             } else {
-                return null;
+                filteredTodos = new Todo[0];
             }
         }
         // page limit
