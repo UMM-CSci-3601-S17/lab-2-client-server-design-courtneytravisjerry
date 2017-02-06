@@ -53,13 +53,13 @@ public class TodoController {
         if(queryParams.containsKey("orderBy")){
             String param = queryParams.get("orderBy")[0];
             if(param.equals("owner")){
-                filteredTodos = orderByOwner(param, filteredTodos);
+                filteredTodos = orderByOwner(filteredTodos);
             } else if (param.equals("category")){
-                filteredTodos = orderByCategory(param, filteredTodos);
+                filteredTodos = orderByCategory(filteredTodos);
             } else if (param.equals("status")){
-                filteredTodos = orderByStatus(param, filteredTodos);
+                filteredTodos = orderByStatus(filteredTodos);
             } else if (param.equals("body")){
-                filteredTodos = orderByBody(param, filteredTodos);
+                filteredTodos = orderByBody(filteredTodos);
             } else {
                 return null;
             }
@@ -160,40 +160,63 @@ public class TodoController {
     }
 
     //From rosettacode.org :)
-    public Todo[] orderByOwner (String owner, Todo[] filteredTodos){
+    public Todo[] orderByOwner (Todo[] filteredTodos){
         Todo[] tmp = new Todo[filteredTodos.length];
-        int i =1; int j=0;
-        tmp[0] = filteredTodos[0];
-//        while(i<todos.length){
-//            String thing = todos[i].owner;
-//            while(thing.compareTo(tmp[j].owner) < 0){
-//                j++;
-//            }
-//            tmp[j].owner = thing;
-//        }
-        for (i =1; i<tmp.length;i++) {
-            for (j = 0; j<i; j++) {
-                if (tmp[i].owner.compareTo(tmp[j].owner) < 0) {
-                    Todo foo = tmp[i];
-                    tmp[i] = tmp[j];
-                    tmp[j] = foo;
+        int i; int j;
+        for (i = 0; i<filteredTodos.length;i++) {
+            for (j = i; j<filteredTodos.length; j++) {
+                if (filteredTodos[i].owner.compareTo(filteredTodos[j].owner) > 0) {
+                    Todo temp = filteredTodos[i];
+                    filteredTodos[i] = filteredTodos[j];
+                    filteredTodos[j] = temp;
                 }
             }
-            i++;
         }
-        return tmp;
+        return filteredTodos;
     }
 
-    public Todo[] orderByCategory(String owner, Todo[] filteredTodos){
-        return null;
+    public Todo[] orderByCategory(Todo[] filteredTodos){
+        Todo[] tmp = new Todo[filteredTodos.length];
+        int i; int j;
+        for (i = 0; i<filteredTodos.length;i++) {
+            for (j = i; j<filteredTodos.length; j++) {
+                if (filteredTodos[i].category.compareTo(filteredTodos[j].category) > 0) {
+                    Todo temp = filteredTodos[i];
+                    filteredTodos[i] = filteredTodos[j];
+                    filteredTodos[j] = temp;
+                }
+            }
+        }
+        return filteredTodos;
     }
 
-    public Todo[] orderByBody(String owner, Todo[] filteredTodos){
-
-        return null;
+    public Todo[] orderByBody(Todo[] filteredTodos){
+        Todo[] tmp = new Todo[filteredTodos.length];
+        int i; int j;
+        for (i = 0; i<filteredTodos.length;i++) {
+            for (j = i; j<filteredTodos.length; j++) {
+                if (filteredTodos[i].body.compareTo(filteredTodos[j].body) > 0) {
+                    Todo temp = filteredTodos[i];
+                    filteredTodos[i] = filteredTodos[j];
+                    filteredTodos[j] = temp;
+                }
+            }
+        }
+        return filteredTodos;
     }
 
-    public Todo[] orderByStatus(String owner, Todo[] filteredTodos){
-        return null;
+    public Todo[] orderByStatus(Todo[] filteredTodos){
+        Todo[] tmp = new Todo[filteredTodos.length];
+        int i; int j;
+        for (i = 0; i<filteredTodos.length;i++) {
+            for (j = i; j<filteredTodos.length; j++) {
+                if (filteredTodos[i].status.compareTo(filteredTodos[j].status) > 0) {
+                    Todo temp = filteredTodos[i];
+                    filteredTodos[i] = filteredTodos[j];
+                    filteredTodos[j] = temp;
+                }
+            }
+        }
+        return filteredTodos;
     }
 }
