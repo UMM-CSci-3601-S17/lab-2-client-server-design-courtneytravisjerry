@@ -6,10 +6,41 @@
     <script type="text/javascript" src="javascript/todo.js"> </script>
 </head>
 <body>
+    <form>
+        <p>ID:</p>
+        <input type="text" name = "_ID"><br>
+        <p>Category:</p>
+        <input type="radio" name="category">homework<br>
+        <input type="radio" name="category">software design<br>
+        <input type="radio" name="category">video games<br>
+        <input type="radio" name="category">groceries<br>
+        <p>Owner:</p>
+        <input type="radio" name="owner">Barry<br>
+        <input type="radio" name="owner">Blanche<br>
+        <input type="radio" name="owner">Dawn<br>
+        <input type="radio" name="owner">Fry<br>
+        <input type="radio" name="owner">Roberta<br>
+        <input type="radio" name="owner">Workman<br>
+        <p>Status:</p>
+        <input type="radio" name="status">Complete<br>
+        <input type="radio" name="status">Incomplete<br>
+        <p>Search by Keyword:</p>
+        <input type="text" name="search"><br>
+        <p>Order By:</p>
+        <input type="radio" name="keyword">Owner<br>
+        <input type="radio" name="keyword">Category<br>
+        <input type="radio" name="keyword">Body<br>
+        <input type="radio" name="keyword">Status<br>
+        <p>Page Limit:</p>
+        <input type="text" name="limit"><br><br>
+    </form>
+
 <button type="button" id="getAll">Get ToDo list</button>
 
 <hr/>
 
 <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
+
+
 </body>
 </html>

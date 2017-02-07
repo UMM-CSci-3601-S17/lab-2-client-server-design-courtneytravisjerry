@@ -23,7 +23,31 @@ var getToDo = function() {
     httpClient.get("/api/todo", function(returned_json){
         document.getElementById('jsonDump').innerHTML = returned_json;
     });
+    ////// makeURL();
 }
+/**
+ * takes fields and makes url
+ */
+function makeURL(){
+    var ID = document.getElementById('_ID');
+    var Cat = document.getElementById('category');
+    var Own = document.getElementById('owner');
+    var stat = document.getElementById('status');
+    var bodykey = document.getElementById('search');
+    var orderKey = document.getElementById('keyword');
+    var pageLimit = document.getElementById('limit');
+    if(Cat != null){
+        var cate = Cat.toString();
+        var URL = "/api/todo?category="+Cat.toString();
+        document.write(URL);
+    }
+
+}
+/**
+ * runs url when button is pushed
+ */
+
+
 /**
  * p much copied from users.js
  * @constructor
