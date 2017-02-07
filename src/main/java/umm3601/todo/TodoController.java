@@ -25,11 +25,11 @@ public class TodoController {
         Todo[] filteredTodos = todos;
 
         // filter by status
-        if(queryParams.containsKey("status")){
+        if (queryParams.containsKey("status")) {
             boolean state;
             if ("complete".equals(queryParams.get("status")[0])) {
                 filteredTodos = returnstatuses(true, filteredTodos);
-            } else if ("incomplete".equals(queryParams.get("status")[0])){
+            } else if ("incomplete".equals(queryParams.get("status")[0])) {
                 filteredTodos = returnstatuses(false, filteredTodos);
             } else {
                 filteredTodos = new Todo[0];
@@ -37,33 +37,33 @@ public class TodoController {
         }
 
         // filter by keyword
-        if(queryParams.containsKey("contains")){
+        if (queryParams.containsKey("contains")) {
             String search = queryParams.get("contains")[0];
             filteredTodos = searchBody(search, filteredTodos);
         }
 
         // filter by owner
-        if(queryParams.containsKey("owner")){
+        if (queryParams.containsKey("owner")) {
             String owner = queryParams.get("owner")[0];
             filteredTodos = filterOwner(owner, filteredTodos);
         }
 
         // filter by category
-        if(queryParams.containsKey("category")){
+        if (queryParams.containsKey("category")) {
             String category = queryParams.get("category")[0];
             filteredTodos = filterCategory(category, filteredTodos);
         }
 
         // order by keyword
-        if(queryParams.containsKey("orderBy")){
+        if (queryParams.containsKey("orderBy")) {
             String param = queryParams.get("orderBy")[0];
-            if(param.equals("owner")){
+            if (param.equals("owner")) {
                 filteredTodos = orderByOwner(filteredTodos);
-            } else if (param.equals("category")){
+            } else if (param.equals("category")) {
                 filteredTodos = orderByCategory(filteredTodos);
-            } else if (param.equals("status")){
+            } else if (param.equals("status")) {
                 filteredTodos = orderByStatus(filteredTodos);
-            } else if (param.equals("body")){
+            } else if (param.equals("body")) {
                 filteredTodos = orderByBody(filteredTodos);
             } else {
                 filteredTodos = new Todo[0];
@@ -71,26 +71,25 @@ public class TodoController {
         }
 
         // page limit
-        if(queryParams.containsKey("limit")){
+        if (queryParams.containsKey("limit")) {
             int limit = Integer.parseInt(queryParams.get("limit")[0]);
-            filteredTodos= getPageLimit(limit, filteredTodos);
+            filteredTodos = getPageLimit(limit, filteredTodos);
         }
 
         return filteredTodos;
     }
 
 
-
-    // Get a single Todo_
+    // Get a single todo_
     public Todo getTodo(String id) {
         return Arrays.stream(todos).filter(x -> x._id.equals(id)).findFirst().orElse(null);
     }
 
-    //Get todo page limit
-    public Todo[] getPageLimit(int limit, Todo[] filteredTodos){
+    //Get todo_ page limit
+    public Todo[] getPageLimit(int limit, Todo[] filteredTodos) {
         Todo[] toReturn = new Todo[limit];
         int i = 0;
-        while(i < limit){
+        while (i < limit) {
             toReturn[i] = filteredTodos[i];
             i++;
         }
@@ -102,79 +101,80 @@ public class TodoController {
         Todo[] holding = new Todo[filteredTodos.length];
         int j = 0;
         int i;
-        for(i = 0; i < filteredTodos.length; i++){
+        for (i = 0; i < filteredTodos.length; i++) {
             if (filteredTodos[i].status.equals(state)) {
                 holding[j] = filteredTodos[i];
                 j++;
             }
         }
         Todo[] toReturn = new Todo[j];
-        for (i=0; i<toReturn.length; i++) {
+        for (i = 0; i < toReturn.length; i++) {
             toReturn[i] = holding[i];
         }
         return toReturn;
     }
 
     // returns all todos with search in body
-    public Todo[] searchBody(String key, Todo[] filteredTodos){
+    public Todo[] searchBody(String key, Todo[] filteredTodos) {
         Todo[] holding = new Todo[filteredTodos.length];
         int j = 0;
         int i;
-        for(i = 0; i < filteredTodos.length; i++){
+        for (i = 0; i < filteredTodos.length; i++) {
             if (filteredTodos[i].body.contains(key)) {
                 holding[j] = filteredTodos[i];
                 j++;
             }
         }
         Todo[] toReturn = new Todo[j];
-        for (i=0; i<toReturn.length; i++) {
+        for (i = 0; i < toReturn.length; i++) {
             toReturn[i] = holding[i];
         }
         return toReturn;
-   }
+    }
 
-   // returns all todos with a given owner
-   public Todo[] filterOwner(String owner, Todo[] filteredTodos) {
-       Todo[] holding = new Todo[filteredTodos.length];
-       int j = 0;
-       int i;
-       for(i = 0; i < filteredTodos.length; i++){
-           if (filteredTodos[i].owner.equals(owner)) {
-               holding[j] = filteredTodos[i];
-               j++;
-           }
-       }
-       Todo[] toReturn = new Todo[j];
-       for (i=0; i<toReturn.length; i++) {
-           toReturn[i] = holding[i];
-       }
-       return toReturn;
-   }
+    // returns all todos with a given owner
+    public Todo[] filterOwner(String owner, Todo[] filteredTodos) {
+        Todo[] holding = new Todo[filteredTodos.length];
+        int j = 0;
+        int i;
+        for (i = 0; i < filteredTodos.length; i++) {
+            if (filteredTodos[i].owner.equals(owner)) {
+                holding[j] = filteredTodos[i];
+                j++;
+            }
+        }
+        Todo[] toReturn = new Todo[j];
+        for (i = 0; i < toReturn.length; i++) {
+            toReturn[i] = holding[i];
+        }
+        return toReturn;
+    }
 
-   // returns all todos with a given category
+    // returns all todos with a given category
     public Todo[] filterCategory(String category, Todo[] filteredTodos) {
         Todo[] holding = new Todo[filteredTodos.length];
         int j = 0;
         int i;
-        for(i = 0; i < filteredTodos.length; i++){
+        for (i = 0; i < filteredTodos.length; i++) {
             if (filteredTodos[i].category.equals(category)) {
                 holding[j] = filteredTodos[i];
                 j++;
             }
         }
         Todo[] toReturn = new Todo[j];
-        for (i=0; i<toReturn.length; i++) {
+        for (i = 0; i < toReturn.length; i++) {
             toReturn[i] = holding[i];
         }
         return toReturn;
     }
 
     // returns all todos, sorted by owner
-    public Todo[] orderByOwner (Todo[] filteredTodos){
+    public Todo[] orderByOwner(Todo[] filteredTodos) {
         Todo[] tmp = new Todo[filteredTodos.length];
-        int i; int j;
-        for (i = 0; i<filteredTodos.length;i++) {
-            for (j = i; j<filteredTodos.length; j++) {
+        int i;
+        int j;
+        for (i = 0; i < filteredTodos.length; i++) {
+            for (j = i; j < filteredTodos.length; j++) {
                 if (filteredTodos[i].owner.compareTo(filteredTodos[j].owner) > 0) {
                     Todo temp = filteredTodos[i];
                     filteredTodos[i] = filteredTodos[j];
@@ -186,11 +186,12 @@ public class TodoController {
     }
 
     // returns all todos, sorted by category
-    public Todo[] orderByCategory(Todo[] filteredTodos){
+    public Todo[] orderByCategory(Todo[] filteredTodos) {
         Todo[] tmp = new Todo[filteredTodos.length];
-        int i; int j;
-        for (i = 0; i<filteredTodos.length;i++) {
-            for (j = i; j<filteredTodos.length; j++) {
+        int i;
+        int j;
+        for (i = 0; i < filteredTodos.length; i++) {
+            for (j = i; j < filteredTodos.length; j++) {
                 if (filteredTodos[i].category.compareTo(filteredTodos[j].category) > 0) {
                     Todo temp = filteredTodos[i];
                     filteredTodos[i] = filteredTodos[j];
@@ -202,11 +203,12 @@ public class TodoController {
     }
 
     // returns all todos, sorted by body
-    public Todo[] orderByBody(Todo[] filteredTodos){
+    public Todo[] orderByBody(Todo[] filteredTodos) {
         Todo[] tmp = new Todo[filteredTodos.length];
-        int i; int j;
-        for (i = 0; i<filteredTodos.length;i++) {
-            for (j = i; j<filteredTodos.length; j++) {
+        int i;
+        int j;
+        for (i = 0; i < filteredTodos.length; i++) {
+            for (j = i; j < filteredTodos.length; j++) {
                 if (filteredTodos[i].body.compareTo(filteredTodos[j].body) > 0) {
                     Todo temp = filteredTodos[i];
                     filteredTodos[i] = filteredTodos[j];
@@ -218,11 +220,12 @@ public class TodoController {
     }
 
     // returns all todos, sorted by status
-    public Todo[] orderByStatus(Todo[] filteredTodos){
+    public Todo[] orderByStatus(Todo[] filteredTodos) {
         Todo[] tmp = new Todo[filteredTodos.length];
-        int i; int j;
-        for (i = 0; i<filteredTodos.length;i++) {
-            for (j = i; j<filteredTodos.length; j++) {
+        int i;
+        int j;
+        for (i = 0; i < filteredTodos.length; i++) {
+            for (j = i; j < filteredTodos.length; j++) {
                 if (filteredTodos[i].status.compareTo(filteredTodos[j].status) < 0) {
                     Todo temp = filteredTodos[i];
                     filteredTodos[i] = filteredTodos[j];
