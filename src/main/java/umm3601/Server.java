@@ -16,7 +16,6 @@ public class Server {
         Gson gson = new Gson();
         UserController userController = new UserController();
         TodoController todoController = new TodoController();
-            // ^ this makes the server stop running and idk why
 
         // Simple example route
         get("/hello", (req, res) -> "Hello World");
