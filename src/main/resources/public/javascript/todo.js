@@ -20,13 +20,7 @@ window.onload = function() {
  */
 var getToDo = function() {
     var httpClient = new HttpClient();
-    // var thing = makeURL();
-    // document.write(thing);
-    // httpClient.get("/api/todo", function(returned_json){
-    //     document.getElementById('jsonDump').innerHTML = returned_json;
-    // });
      var url = makeURL();
-    // document.getElementById('urlDump').innerHTML = makeURL().URL;
     httpClient.get(url,function(results) {
        document.getElementById('jsonDump').innerHTML = results;
     });
