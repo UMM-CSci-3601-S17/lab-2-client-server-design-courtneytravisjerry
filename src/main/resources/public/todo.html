@@ -6,10 +6,41 @@
     <script type="text/javascript" src="javascript/todo.js"> </script>
 </head>
 <body>
+    <form>
+        <p>ID:</p>
+        <input type="text" id= "_ID"><br>
+        <p>Category:</p>
+        <input type="radio" id="category1">groceries<br>
+        <input type="radio" id="category2">homework<br>
+        <input type="radio" id="category3">software design<br>
+        <input type="radio" id="category4">video games<br>
+        <p>Owner:</p>
+        <input type="radio" id="owner1">Barry<br>
+        <input type="radio" id="owner2">Blanche<br>
+        <input type="radio" id="owner3">Dawn<br>
+        <input type="radio" id="owner4">Fry<br>
+        <input type="radio" id="owner5" >Roberta<br>
+        <input type="radio" id="owner6">Workman<br>
+        <p>Status:</p>
+        <input type="radio" id="complete">Complete<br>
+        <input type="radio" id="incomplete" >Incomplete<br>
+        <p>Search by Keyword:</p>
+        <input type="text" id="search"><br>
+        <p>Order By:</p>
+        <input type="radio" id="keyword1">Body<br>
+        <input type="radio" id="keyword2">Category<br>
+        <input type="radio" id="keyword3">Owner<br>
+        <input type="radio" id="keyword4">Status<br>
+        <p>Page Limit:</p>
+        <input type="text" id="limit"><br><br>
+    </form>
+
 <button type="button" id="getAll">Get ToDo list</button>
 
 <hr/>
 
 <div id="jsonDump" style="margin-top:20px"> Json will go here </div>
+
+
 </body>
 </html>
