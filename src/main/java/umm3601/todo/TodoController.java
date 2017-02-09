@@ -219,6 +219,7 @@ public class TodoController {
         return filteredTodos;
     }
 
+
     // returns all todos, sorted by status
     public Todo[] orderByStatus(Todo[] filteredTodos) {
         Todo[] tmp = new Todo[filteredTodos.length];

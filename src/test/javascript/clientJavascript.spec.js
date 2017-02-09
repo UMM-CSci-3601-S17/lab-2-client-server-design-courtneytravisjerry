@@ -5,6 +5,8 @@ describe('testing basic functions', function(){
         expect(testStringLength("kittens")).toEqual(7);
     });
 
+
+
     it('returnKittens should return kittens', function(){
         expect(returnKittens()).toBe("kittens");
     });
